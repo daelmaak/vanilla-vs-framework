@@ -1,0 +1,7 @@
+.cart {
+  padding-right: 100px;
+}
+
+.cart .cart-item:nth-child(1n + 1) {
+  margin-top: 16px;
+}
