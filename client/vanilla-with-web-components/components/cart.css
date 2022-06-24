@@ -1,0 +1,7 @@
+:host {
+  padding-right: 100px;
+}
+
+:host isy-cart-item:nth-child(1n + 2) {
+  margin-top: 16px;
+}
