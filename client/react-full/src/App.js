@@ -1,19 +1,13 @@
 import './App.css';
-import { useRef } from 'react';
 import { Cart } from './Cart';
 import { ProductList } from './ProductList';
+import { cartModel } from './models/cart-model';
 
 function App() {
-  const cartRef = useRef();
-
-  function onProductSelected(product) {
-    cartRef.current.addProduct(product);
-  }
-
   return (
     <div className="app">
-      <Cart ref={cartRef} />
-      <ProductList onProductSelected={onProductSelected} />
+      <Cart cartModel={cartModel} />
+      <ProductList />
     </div>
   );
 }

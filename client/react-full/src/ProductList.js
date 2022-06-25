@@ -1,8 +1,9 @@
 import './ProductList.css';
 import { useEffect, useState } from 'react';
 import { ProductCard } from './ProductCard';
+import { cartModel } from './models/cart-model';
 
-export function ProductList({ onProductSelected }) {
+export function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function ProductList({ onProductSelected }) {
           <li key={product.id}>
             <ProductCard
               product={product}
-              onProductSelected={() => onProductSelected(product)}
+              onProductSelected={() => cartModel.addCartItem(product, 1)}
             ></ProductCard>
           </li>
         ))}

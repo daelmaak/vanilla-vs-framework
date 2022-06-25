@@ -1,53 +1,28 @@
 import './Cart.css';
-import { Component, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
+import { observer } from 'mobx-react';
 
 const CartItem = lazy(() => import('./CartItem'));
 
-export class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cartEntries: new Map(),
-    };
-  }
-
-  addProduct(product) {
-    if (!this.state.cartEntries.has(product.id)) {
-      this.state.cartEntries.set(product.id, {
-        quantity: 0,
-        product,
-      });
-    }
-    this.state.cartEntries.get(product.id).quantity++;
-
-    this.setState(this.state);
-  }
-
-  #onQuantityChange = (productId, change) => {
-    const cartEntry = this.state.cartEntries.get(productId);
-    cartEntry.quantity += change;
-    this.setState(this.state);
-  };
-
-  render() {
-    return (
-      <div className="cart">
-        <h2>Cart</h2>
-        <ul>
-          {Array.from(this.state.cartEntries.values())
-            .filter(({ quantity }) => quantity > 0)
-            .map((ce) => (
-              <li key={ce.product.id}>
-                <Suspense>
-                  <CartItem
-                    cartEntry={ce}
-                    onQuantityChange={this.#onQuantityChange}
-                  />
-                </Suspense>
-              </li>
-            ))}
-        </ul>
-      </div>
-    );
-  }
-}
+export const Cart = observer(({ cartModel }) => {
+  return (
+    <div className="cart">
+      <h2>Cart</h2>
+      <ul>
+        {cartModel.cartItems.map(({ product, quantity }) => (
+          <li key={product.id}>
+            <Suspense>
+              <CartItem
+                product={product}
+                quantity={quantity}
+                onQuantityChange={(delta) =>
+                  cartModel.updateItemQuantity(product.id, delta)
+                }
+              />
+            </Suspense>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+});
