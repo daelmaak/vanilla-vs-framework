@@ -1,6 +1,6 @@
 import './CartItem.css';
 
-export function CartItem({ cartEntry, onQuantityChange }) {
+export default function CartItem({ cartEntry, onQuantityChange }) {
   const { product, quantity } = cartEntry;
 
   return (

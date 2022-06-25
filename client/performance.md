@@ -1,5 +1,12 @@
 # Perf measurements
 
+## Network transfer
+
+| App               | Transfered |
+| ----------------- | ---------- |
+| Web Component App | 8 kB       |
+| React App         | 362 kB     |
+
 ## Memory consumption after adding 5 products to cart
 
 | App               | Total  | Compiled code |

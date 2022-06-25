@@ -1,6 +1,7 @@
 import './Cart.css';
-import { Component } from 'react';
-import { CartItem } from './CartItem';
+import { Component, lazy, Suspense } from 'react';
+
+const CartItem = lazy(() => import('./CartItem'));
 
 export class Cart extends Component {
   constructor(props) {
@@ -37,10 +38,12 @@ export class Cart extends Component {
             .filter(({ quantity }) => quantity > 0)
             .map((ce) => (
               <li key={ce.product.id}>
-                <CartItem
-                  cartEntry={ce}
-                  onQuantityChange={this.#onQuantityChange}
-                />
+                <Suspense>
+                  <CartItem
+                    cartEntry={ce}
+                    onQuantityChange={this.#onQuantityChange}
+                  />
+                </Suspense>
               </li>
             ))}
         </ul>
