@@ -1,0 +1,11 @@
+.cart {
+  padding-right: 100px;
+}
+
+.cart li {
+  display: block;
+}
+
+.cart li:nth-child(1n + 2) {
+  margin-top: 16px;
+}

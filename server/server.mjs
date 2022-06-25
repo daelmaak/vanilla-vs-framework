@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
   if (req.url === "/products" && req.method == "GET") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     return res.end(JSON.stringify(products));
   }
   res.statusCode = 404;
