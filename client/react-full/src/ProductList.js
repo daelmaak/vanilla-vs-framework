@@ -1,20 +1,21 @@
 import './ProductList.css';
-import { useEffect, useState } from 'react';
+import { observer } from 'mobx-react';
+import { useEffect } from 'react';
+import { cartModel } from './models/cart.model';
+import { Pager } from './Pager';
 import { ProductCard } from './ProductCard';
-import { cartModel } from './models/cart-model';
 
-export function ProductList() {
-  const [products, setProducts] = useState([]);
-
+export const ProductList = observer(({ productListModel }) => {
   useEffect(() => {
-    fetchProducts().then(setProducts);
-  }, []);
+    productListModel.load();
+  }, [productListModel]);
 
   return (
     <div className="product-list">
       <h2>Products</h2>
+      <Pager listModel={productListModel} />
       <ul>
-        {products.map((product) => (
+        {productListModel.products.map((product) => (
           <li key={product.id}>
             <ProductCard
               product={product}
@@ -23,10 +24,7 @@ export function ProductList() {
           </li>
         ))}
       </ul>
+      <Pager listModel={productListModel} />
     </div>
   );
-}
-
-function fetchProducts() {
-  return fetch('http://localhost:3000/products').then((res) => res.json());
-}
+});
