@@ -22,7 +22,7 @@ class App extends HTMLElement {
   }
 
   #onProductSelected(product) {
-    this.$cart.addProduct(product);
+    this.$cart.addItem(product);
   }
 }
 

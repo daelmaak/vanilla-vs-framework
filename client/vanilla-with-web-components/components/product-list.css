@@ -3,4 +3,6 @@ ul {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 300px;
   gap: 1rem;
+  padding: 0;
+  list-style-type: none;
 }

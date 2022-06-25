@@ -19,9 +19,12 @@ export class ProductList extends HTMLElement {
 
   #update() {
     const $products = this.products.map((product) => {
+      const $li = document.createElement('li');
       const $card = document.createElement('isy-product-card');
       $card.data = { product };
-      return $card;
+
+      $li.appendChild($card);
+      return $li;
     });
     this.shadowRoot.querySelector('ul').replaceChildren(...$products);
   }

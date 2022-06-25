@@ -14,10 +14,10 @@ export class ProductCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#update();
+    this.#init();
   }
 
-  #update() {
+  #init() {
     const { product } = this.data;
 
     this.shadowRoot.querySelector(`.${productNameCx}`).textContent =
