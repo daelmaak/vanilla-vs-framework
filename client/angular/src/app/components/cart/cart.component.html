@@ -1,0 +1,16 @@
+<h2>Cart</h2>
+<ul>
+  <li
+    *ngFor="
+      let cartItem of cartService.cartItems$
+        | async
+        | keyvalue: orderCartItemsBy;
+      trackBy: trackCartItemsBy
+    "
+  >
+    <app-cart-item
+      [item]="cartItem.value"
+      (quantityChange)="onQuantityChange(cartItem.value.product, $event)"
+    ></app-cart-item>
+  </li>
+</ul>

@@ -1,0 +1,6 @@
+<article class="cart-item">
+  <h3>{{ item.product.name }}</h3>
+  <span>{{ item.quantity }}</span>
+  <button (click)="quantityChange.emit(item.quantity + 1)">+</button>
+  <button (click)="quantityChange.emit(item.quantity - 1)">-</button>
+</article>

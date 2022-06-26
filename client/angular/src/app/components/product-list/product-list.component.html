@@ -1,0 +1,11 @@
+<app-pager (paging)="onPaging($event)"></app-pager>
+<h2>Products</h2>
+<ul>
+  <li *ngFor="let product of productService.products$ | async">
+    <app-product-card
+      [product]="product"
+      (click)="productSelected.emit(product)"
+    ></app-product-card>
+  </li>
+</ul>
+<app-pager (paging)="onPaging($event)"></app-pager>
