@@ -3,7 +3,7 @@ import { action, makeAutoObservable } from 'mobx';
 class ProductListModel {
   products = [];
   page = 1;
-  size = 20;
+  size = 40;
 
   constructor() {
     makeAutoObservable(this);
