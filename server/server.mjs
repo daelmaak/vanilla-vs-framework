@@ -9,6 +9,7 @@ const server = http.createServer((req, res) => {
   if (req.url.startsWith("/products") && req.method == "GET") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-control", "public, max-age=604800");
     res.setHeader("Access-Control-Allow-Origin", "*");
 
     const url = new URL(req.url, `http://${req.headers.host}`);
