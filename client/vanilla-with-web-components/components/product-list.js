@@ -1,4 +1,6 @@
 import './product-card.js';
+import './pager.js';
+import { productListModel } from '../models/product-list.model.js';
 
 export class ProductList extends HTMLElement {
   constructor() {
@@ -8,17 +10,23 @@ export class ProductList extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="./components/product-list.css">
       <h2>Products</h2>
+      <isy-pager></isy-pager>
       <ul></ul>
+      <isy-pager></isy-pager>
     `;
+
+    this.shadowRoot.querySelectorAll('isy-pager').forEach((pager) => {
+      pager.init(productListModel);
+    });
   }
 
   async connectedCallback() {
-    this.products = await this.#fetchProducts();
-    this.#update();
+    productListModel.subscribe((_) => this.#update());
+    await productListModel.load();
   }
 
   #update() {
-    const $products = this.products.map((product) => {
+    const $products = productListModel.products.map((product) => {
       const $li = document.createElement('li');
       const $card = document.createElement('isy-product-card');
       $card.data = { product };
@@ -27,11 +35,6 @@ export class ProductList extends HTMLElement {
       return $li;
     });
     this.shadowRoot.querySelector('ul').replaceChildren(...$products);
-  }
-
-  async #fetchProducts() {
-    const res = await fetch('http://localhost:3000/products');
-    return res.json();
   }
 }
 

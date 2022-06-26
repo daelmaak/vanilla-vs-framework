@@ -1,3 +1,4 @@
+const templateId = 'product-card';
 const productNameCx = 'product-name';
 
 export class ProductCard extends HTMLElement {
@@ -5,12 +6,8 @@ export class ProductCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
-    this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" href="./components/product-card.css">
-      <article> 
-        <span class="${productNameCx}"></span>
-      </article> 
-    `;
+    const template = document.getElementById(templateId);
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
@@ -36,3 +33,13 @@ export class ProductCard extends HTMLElement {
 }
 
 customElements.define('isy-product-card', ProductCard);
+
+const template = document.createElement('template');
+template.id = templateId;
+template.innerHTML = `
+  <link rel="stylesheet" href="./components/product-card.css">
+  <article> 
+    <span class="${productNameCx}"></span>
+  </article> 
+`;
+document.body.append(template);
